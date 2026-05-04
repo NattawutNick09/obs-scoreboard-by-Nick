@@ -97,14 +97,39 @@ function swapSides() {
 }
 
 function resetAll() {
-    if (!confirm("Reset ข้อมูล?")) return;
-    scoreValA = 0; scoreValB = 0;
+    if (!confirm("Reset ข้อมูลทั้งหมด?")) return;
+
+    // 1. รีเซ็ตคะแนน
+    scoreValA = 0;
+    scoreValB = 0;
     document.getElementById('scoreA').innerText = "0";
     document.getElementById('scoreB').innerText = "0";
+
+    // 2. รีเซ็ตชื่อทีม (อิงตามฝั่งสีที่คุณสลับล่าสุด)
+    // ฝั่งซ้าย (Blue) ให้เป็น Team A, ฝั่งขวา (Red) ให้เป็น Team B
+    document.getElementById('nameA').value = "Team A";
+    document.getElementById('nameB').value = "Team B";
+
+    // 3. รีเซ็ตข้อมูลทัวร์นาเมนต์
     document.getElementById('round').value = "Round ?";
     document.getElementById('bestOf').value = "Best of 3";
     document.getElementById('game').value = "Game 1";
-    writeLog("Reset all scores and info");
+
+    // 4. รีเซ็ตช่อง Text เสริม (Text 1 - 4)
+    document.getElementById('text1').value = "";
+    document.getElementById('text2').value = "";
+    document.getElementById('text3').value = "";
+    document.getElementById('text4').value = "";
+
+    // 5. ล้างรูป Logo ให้กลับเป็นคำว่า "Logo" เหมือนตอนเปิดเว็บครั้งแรก
+    logoFileA = "";
+    logoFileB = "";
+    document.getElementById('previewA').innerHTML = "<span>Logo</span>";
+    document.getElementById('previewB').innerHTML = "<span>Logo</span>";
+
+    writeLog("Reset all scores, names, and logos to default");
+
+    // 6. ส่งค่าที่รีเซ็ตแล้วไปอัปเดตบน OBS ทันที
     syncToOBS();
 }
 
