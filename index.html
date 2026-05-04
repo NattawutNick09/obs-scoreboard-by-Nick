@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Scoreboard Control - Fixed Logo Edition</title>
+    <!-- เชื่อมต่อ Library ภายนอก -->
+    <script src="https://cdn.jsdelivr.net/npm/obs-websocket-js"></script>
+    <!-- เชื่อมต่อไฟล์ CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="status-text">Status: Connected</div>
+
+    <div class="main-container">
+        <div class="top-grid">
+            <!-- RED TEAM -->
+            <div class="team-box">
+                <div class="team-header header-red">RED TEAM</div>
+                <div class="name-row">
+                    <div class="logo-preview" onclick="document.getElementById('fileA').click()" id="previewA">
+                        <span>Logo</span>
+                    </div>
+                    <input type="text" class="name-input" id="nameA" value="TEAM A" oninput="syncToOBS()">
+                </div>
+                <div class="score-row">
+                    <button class="btn-score btn-plus" onclick="updateScore('A', 1)">+</button>
+                    <div class="score-box" id="scoreA">0</div>
+                    <button class="btn-score btn-minus" onclick="updateScore('A', -1)">-</button>
+                </div>
+                <input type="file" id="fileA" onchange="handleLogo(this, 'A')">
+            </div>
+
+            <!-- BLUE TEAM -->
+            <div class="team-box">
+                <div class="team-header header-blue">BLUE TEAM</div>
+                <div class="name-row">
+                    <input type="text" class="name-input" id="nameB" value="TEAM B" oninput="syncToOBS()">
+                    <div class="logo-preview" onclick="document.getElementById('fileB').click()" id="previewB">
+                        <span>Logo</span>
+                    </div>
+                </div>
+                <div class="score-row" style="flex-direction: row-reverse;">
+                    <button class="btn-score btn-minus" onclick="updateScore('B', -1)">-</button>
+                    <div class="score-box" id="scoreB">0</div>
+                    <button class="btn-score btn-plus" onclick="updateScore('B', 1)">+</button>
+                </div>
+                <input type="file" id="fileB" onchange="handleLogo(this, 'B')">
+            </div>
+        </div>
+
+        <div class="info-row">
+            <input type="text" class="info-input" id="round" value="Round ?" oninput="syncToOBS()">
+            <input type="text" class="info-input" id="bestOf" value="Best of 3" oninput="syncToOBS()">
+            <input type="text" class="info-input" id="game" value="Game 1" oninput="syncToOBS()">
+        </div>
+
+        <button class="btn-main btn-swap" onclick="swapSides()">Swap teams</button>
+        <button class="btn-main btn-reset" onclick="resetAll()">Reset !</button>
+
+        <div class="footer-inputs">
+            <div class="text-group">
+                <div class="text-label">Text 1</div><input type="text" class="text-field" id="text1"
+                    oninput="syncToOBS()">
+            </div>
+            <div class="text-group">
+                <div class="text-label">Text 3</div><input type="text" class="text-field" id="text3"
+                    oninput="syncToOBS()">
+            </div>
+            <div class="text-group">
+                <div class="text-label">Text 2</div><input type="text" class="text-field" id="text2"
+                    oninput="syncToOBS()">
+            </div>
+            <div class="text-group">
+                <div class="text-label">Text 4</div><input type="text" class="text-field" id="text4"
+                    oninput="syncToOBS()">
+            </div>
+        </div>
+
+        <div class="config-area">
+            <label class="config-label">ตำแหน่งโฟลเดอร์รูปภาพ</label>
+            <input type="text" id="basePath" class="path-input" placeholder="C:\Users\Admin\Desktop\Logos\"
+                oninput="savePath()">
+            <div id="debug-log">Log: Ready...</div>
+        </div>
+
+        <div class="instruction-box">
+            <b>ข้อความ : ต้องตั้งชื่อใน OBS (GDI+ Text) ให้ตรงกัน</b>
+            <ul class="instruction-list">
+                <li>ชื่อทีม : TeamA_Name , TeamB_Name</li>
+                <li>คะแนน : TeamA_Score , TeamB_Score</li>
+                <li>ช่อง Round : Round_Text</li>
+                <li>ช่อง Best of : BestOf_Text</li>
+                <li>ช่อง Game : Game_Text</li>
+                <li>ช่อง Text 1 : Text1_Info</li>
+                <li>ช่อง Text 2 : Text2_Info</li>
+                <li>ช่อง Text 3 : Text3_Info</li>
+                <li>ช่อง Text 4 : Text4_Info</li>
+            </ul>
+            <b>Logo : สร้าง Image Source ชื่อ TeamA_Logo และ TeamB_Logo</b>
+        </div>
+    </div>
+
+    <!-- เชื่อมต่อไฟล์ JavaScript ไว้ท้าย body -->
+    <script src="script.js"></script>
+</body>
+
+</html>
