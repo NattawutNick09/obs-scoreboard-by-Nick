@@ -111,7 +111,7 @@ function resetAll() {
     document.getElementById('nameB').value = "Team B";
 
     // 3. รีเซ็ตข้อมูลทัวร์นาเมนต์
-    document.getElementById('round').value = "Round ?";
+    document.getElementById('round').value = "Round";
     document.getElementById('bestOf').value = "Best of 3";
     document.getElementById('game').value = "Game 1";
 
