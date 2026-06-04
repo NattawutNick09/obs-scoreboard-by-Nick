@@ -107,8 +107,8 @@ function resetAll() {
 
     // 2. รีเซ็ตชื่อทีม (อิงตามฝั่งสีที่คุณสลับล่าสุด)
     // ฝั่งซ้าย (Blue) ให้เป็น Team A, ฝั่งขวา (Red) ให้เป็น Team B
-    document.getElementById('nameA').value = "Team A";
-    document.getElementById('nameB').value = "Team B";
+    document.getElementById('nameA').value = "TEAM A";
+    document.getElementById('nameB').value = "TEAM B";
 
     // 3. รีเซ็ตข้อมูลทัวร์นาเมนต์
     document.getElementById('round').value = "Round";
